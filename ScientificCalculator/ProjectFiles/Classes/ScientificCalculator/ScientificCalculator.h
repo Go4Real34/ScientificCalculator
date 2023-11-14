@@ -1,4 +1,13 @@
 #pragma once
 
 class ScientificCalculator {
+	public:
+		ScientificCalculator() = default;
+		~ScientificCalculator() = default;
+
+	private:
+		long double value1 = 0;
+		long double value2 = 0;
+
+		long double result = 0;
 };
