@@ -16,12 +16,14 @@ class ScientificCalculator {
 
 			ADD = 1,
 			SUBSTRACT = 2,
+			MULTIPLY = 3,
 
-			LENGTH = 3
+			LENGTH = 4
 		};
 
 		void add();
 		void substract();
+		void multiply();
 
 		void printResult(const MenuChoices& operationIndex) const;
 		bool executeOperation(const MenuChoices& operationIndex);

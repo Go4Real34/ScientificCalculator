@@ -14,6 +14,11 @@ void ScientificCalculator::substract() {
 	return;
 }
 
+void ScientificCalculator::multiply() {
+	this -> result = this -> value1 * this -> value2;
+	return;
+}
+
 void ScientificCalculator::printResult(const MenuChoices& operationIndex) const {
 	std::cout << "Result: ";
 	switch (operationIndex) {
@@ -24,6 +29,11 @@ void ScientificCalculator::printResult(const MenuChoices& operationIndex) const 
 		
 		case MenuChoices::SUBSTRACT: {
 			std::cout << this -> value1 << " - " << this -> value2;
+			break;
+		}
+		
+		case MenuChoices::MULTIPLY: {
+			std::cout << this -> value1 << " * " << this -> value2;
 			break;
 		}
 		
@@ -52,6 +62,12 @@ bool ScientificCalculator::executeOperation(const MenuChoices& operationIndex) {
 			break;
 		}
 		
+		case MenuChoices::MULTIPLY: {
+			this -> getNumberValues();
+			this -> multiply();
+			break;
+		}
+		
 		case MenuChoices::EXIT: {
 			std::cout << "Thanks for using our Scientific Calculator." << std::endl;
 			std::cout << "Exiting from the calculator..." << std::endl;
@@ -76,6 +92,7 @@ ScientificCalculator::MenuChoices ScientificCalculator::getMenuChoice() const {
 		std::cout << "Please select an operation from the menu below." << std::endl;
 		std::cout << "[1] - Add" << std::endl;
 		std::cout << "[2] - Substract" << std::endl;
+		std::cout << "[3] - Multiply" << std::endl;
 
 		std::cout << std::endl;
 		std::cout << "[0] - Quit" << std::endl;
