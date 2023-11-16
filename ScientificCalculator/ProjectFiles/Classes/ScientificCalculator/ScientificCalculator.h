@@ -17,6 +17,7 @@ class ScientificCalculator {
 			LENGTH = 1
 		};
 
+		bool executeOperation(const MenuChoices& operationIndex) const;
 		MenuChoices getMenuChoice() const;
 
 		bool getNumberValues();

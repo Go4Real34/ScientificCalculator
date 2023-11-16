@@ -4,6 +4,21 @@
 
 #include "ScientificCalculator.h"
 
+bool ScientificCalculator::executeOperation(const MenuChoices& operationIndex) const {
+	switch (operationIndex) {
+		case MenuChoices::EXIT: {
+			std::cout << "Thanks for using our Scientific Calculator." << std::endl;
+			std::cout << "Exiting from the calculator..." << std::endl;
+			return false;
+		}
+		
+		default: {
+			std::cout << "Invalid operation index. Please enter a valid operation in the menu." << std::endl << std::endl;
+			return false;
+		}
+	}
+}
+
 ScientificCalculator::MenuChoices ScientificCalculator::getMenuChoice() const {
 	std::string line = "";
 
