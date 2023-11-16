@@ -19,6 +19,18 @@ void ScientificCalculator::multiply() {
 	return;
 }
 
+bool ScientificCalculator::divide() {
+	if (this -> value2 != 0) {
+		this -> result = this -> value1 / this -> value2;
+		return true;
+	} else {
+		std::cout << std::endl;
+		std::cout << "Division by zero detected." << std::endl;
+		std::cout << "Please enter a valid number for divisor." << std::endl;
+		return false;
+	}
+}
+
 void ScientificCalculator::printResult(const MenuChoices& operationIndex) const {
 	std::cout << "Result: ";
 	switch (operationIndex) {
@@ -37,6 +49,11 @@ void ScientificCalculator::printResult(const MenuChoices& operationIndex) const 
 			break;
 		}
 		
+		case MenuChoices::DIVIDE: {
+			std::cout << this -> value1 << " / " << this -> value2;
+			break;
+		}
+		
 		case MenuChoices::EXIT: {
 			break;
 		}
@@ -49,6 +66,7 @@ void ScientificCalculator::printResult(const MenuChoices& operationIndex) const 
 }
 
 bool ScientificCalculator::executeOperation(const MenuChoices& operationIndex) {
+	bool shouldPrintResult = true;
 	switch (operationIndex) {
 		case MenuChoices::ADD: {
 			this -> getNumberValues();
@@ -68,6 +86,12 @@ bool ScientificCalculator::executeOperation(const MenuChoices& operationIndex) {
 			break;
 		}
 		
+		case MenuChoices::DIVIDE: {
+			this -> getNumberValues();
+			shouldPrintResult = this -> divide();
+			break;
+		}
+		
 		case MenuChoices::EXIT: {
 			std::cout << "Thanks for using our Scientific Calculator." << std::endl;
 			std::cout << "Exiting from the calculator..." << std::endl;
@@ -80,8 +104,10 @@ bool ScientificCalculator::executeOperation(const MenuChoices& operationIndex) {
 		}
 	}
 
-	std::cout << std::endl;
-	this -> printResult(operationIndex);
+	if (shouldPrintResult) {
+		std::cout << std::endl;
+		this -> printResult(operationIndex);
+	}
 	return true;
 }
 
@@ -93,6 +119,7 @@ ScientificCalculator::MenuChoices ScientificCalculator::getMenuChoice() const {
 		std::cout << "[1] - Add" << std::endl;
 		std::cout << "[2] - Substract" << std::endl;
 		std::cout << "[3] - Multiply" << std::endl;
+		std::cout << "[4] - Divide" << std::endl;
 
 		std::cout << std::endl;
 		std::cout << "[0] - Quit" << std::endl;
