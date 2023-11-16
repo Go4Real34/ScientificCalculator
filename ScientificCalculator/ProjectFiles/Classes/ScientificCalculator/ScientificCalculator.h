@@ -10,4 +10,7 @@ class ScientificCalculator {
 		long double value2 = 0;
 
 		long double result = 0;
+
+		bool getNumberValues();
+		bool getNumberValue(const bool& isFirst);
 };
