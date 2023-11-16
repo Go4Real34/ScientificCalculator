@@ -11,6 +11,14 @@ class ScientificCalculator {
 
 		long double result = 0;
 
+		const enum MenuChoices {
+			EXIT = 0,
+
+			LENGTH = 1
+		};
+
+		MenuChoices getMenuChoice() const;
+
 		bool getNumberValues();
 		bool getNumberValue(const bool& isFirst);
 };
