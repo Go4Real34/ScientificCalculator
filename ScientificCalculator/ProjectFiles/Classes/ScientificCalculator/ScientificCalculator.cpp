@@ -4,8 +4,36 @@
 
 #include "ScientificCalculator.h"
 
-bool ScientificCalculator::executeOperation(const MenuChoices& operationIndex) const {
+void ScientificCalculator::add() {
+	this -> result = this -> value1 + this -> value2;
+	return;
+}
+
+void ScientificCalculator::printResult(const MenuChoices& operationIndex) const {
 	switch (operationIndex) {
+		case MenuChoices::ADD: {
+			std::cout << "Result: " << this -> value1 << " + " << this -> value2 << " = " << this -> result << std::endl;
+			break;
+		}
+		
+		case MenuChoices::EXIT: {
+			break;
+		}
+		
+		default: {
+			break;
+		}
+	}
+}
+
+bool ScientificCalculator::executeOperation(const MenuChoices& operationIndex) {
+	switch (operationIndex) {
+		case MenuChoices::ADD: {
+			this -> getNumberValues();
+			this -> add();
+			break;
+		}
+		
 		case MenuChoices::EXIT: {
 			std::cout << "Thanks for using our Scientific Calculator." << std::endl;
 			std::cout << "Exiting from the calculator..." << std::endl;
@@ -17,6 +45,10 @@ bool ScientificCalculator::executeOperation(const MenuChoices& operationIndex) c
 			return false;
 		}
 	}
+
+	std::cout << std::endl;
+	this -> printResult(operationIndex);
+	return true;
 }
 
 ScientificCalculator::MenuChoices ScientificCalculator::getMenuChoice() const {
@@ -24,6 +56,9 @@ ScientificCalculator::MenuChoices ScientificCalculator::getMenuChoice() const {
 
 	while (true) {
 		std::cout << "Please select an operation from the menu below." << std::endl;
+		std::cout << "[1] - Add" << std::endl;
+
+		std::cout << std::endl;
 		std::cout << "[0] - Quit" << std::endl;
 		std::cout << "Choice: ";
 		std::getline(std::cin, line);
@@ -47,7 +82,11 @@ ScientificCalculator::MenuChoices ScientificCalculator::getMenuChoice() const {
 }
 
 bool ScientificCalculator::getNumberValues() {
-	return getNumberValue(true) && getNumberValue(false);
+	if (!getNumberValue(true) || !getNumberValue(false)) {
+		std::cout << "Couldn't get values. Process cancelled." << std::endl << std::endl;
+		return false;
+	}
+	return true;
 }
 
 bool ScientificCalculator::getNumberValue(const bool& isFirst) {

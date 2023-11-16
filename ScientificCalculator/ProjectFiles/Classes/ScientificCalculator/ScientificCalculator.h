@@ -14,10 +14,15 @@ class ScientificCalculator {
 		const enum MenuChoices {
 			EXIT = 0,
 
-			LENGTH = 1
+			ADD = 1,
+
+			LENGTH = 2
 		};
 
-		bool executeOperation(const MenuChoices& operationIndex) const;
+		void add();
+
+		void printResult(const MenuChoices& operationIndex) const;
+		bool executeOperation(const MenuChoices& operationIndex);
 		MenuChoices getMenuChoice() const;
 
 		bool getNumberValues();
