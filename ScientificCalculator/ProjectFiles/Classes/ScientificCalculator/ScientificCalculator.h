@@ -28,8 +28,9 @@ class ScientificCalculator {
 			SQUARE_ROOT = 12,
 			POWER = 13,
 			POWER_OF_TEN = 14,
+			LOGARITHM_WITH_BASE_TEN = 15,
 
-			LENGTH = 15
+			LENGTH = 16
 		};
 
 		void add();
@@ -46,6 +47,7 @@ class ScientificCalculator {
 		bool squareRoot();
 		void power();
 		void powerOfTen();
+		bool logarithmWithBaseTen();
 
 		void printResult(const MenuChoices& operationIndex) const;
 		bool executeOperation(const MenuChoices& operationIndex);
