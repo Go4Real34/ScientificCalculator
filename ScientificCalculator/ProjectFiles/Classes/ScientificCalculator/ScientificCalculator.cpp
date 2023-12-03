@@ -112,6 +112,11 @@ void ScientificCalculator::power() {
 	return;
 }
 
+void ScientificCalculator::powerOfTen() {
+	this -> result = pow(10, this -> value1);
+	return;
+}
+
 
 void ScientificCalculator::printResult(const MenuChoices& operationIndex) const {
 	std::cout << "Result: ";
@@ -178,6 +183,11 @@ void ScientificCalculator::printResult(const MenuChoices& operationIndex) const 
 		
 		case MenuChoices::POWER: {
 			std::cout << this -> value1 << " ^ " << this -> value2;
+			break;
+		}
+
+		case MenuChoices::POWER_OF_TEN: {
+			std::cout << "10 ^ " << this -> value1;
 			break;
 		}
 		
@@ -299,6 +309,14 @@ bool ScientificCalculator::executeOperation(const MenuChoices& operationIndex) {
 			break;
 		}
 		
+		case MenuChoices::POWER_OF_TEN: {
+			if (!this -> getNumberValue("")) {
+				return true;
+			}
+			this -> powerOfTen();
+			break;
+		}
+		
 		case MenuChoices::EXIT: {
 			std::cout << "Thanks for using our Scientific Calculator." << std::endl;
 			std::cout << "Exiting from the calculator..." << std::endl;
@@ -337,6 +355,7 @@ ScientificCalculator::MenuChoices ScientificCalculator::getMenuChoice() const {
 		std::cout << "[11] - Square" << std::endl;
 		std::cout << "[12] - Square Root" << std::endl;
 		std::cout << "[13] - Power" << std::endl;
+		std::cout << "[14] - Power of Ten" << std::endl;
 
 		std::cout << std::endl;
 		std::cout << "[0] - Quit" << std::endl;

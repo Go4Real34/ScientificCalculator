@@ -27,8 +27,9 @@ class ScientificCalculator {
 			SQUARE = 11,
 			SQUARE_ROOT = 12,
 			POWER = 13,
+			POWER_OF_TEN = 14,
 
-			LENGTH = 14
+			LENGTH = 15
 		};
 
 		void add();
@@ -44,6 +45,7 @@ class ScientificCalculator {
 		void square();
 		bool squareRoot();
 		void power();
+		void powerOfTen();
 
 		void printResult(const MenuChoices& operationIndex) const;
 		bool executeOperation(const MenuChoices& operationIndex);
