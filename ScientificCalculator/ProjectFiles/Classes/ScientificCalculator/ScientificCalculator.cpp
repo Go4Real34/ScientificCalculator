@@ -23,12 +23,12 @@ bool ScientificCalculator::divide() {
 	if (this -> value2 != 0) {
 		this -> result = this -> value1 / this -> value2;
 		return true;
-	} else {
-		std::cout << std::endl;
-		std::cout << "Division by zero detected." << std::endl;
-		std::cout << "Please enter a valid number for divisor." << std::endl;
-		return false;
 	}
+	
+	std::cout << std::endl;
+	std::cout << "Division by zero detected." << std::endl;
+	std::cout << "Please enter a valid number for divisor." << std::endl;
+	return false;
 }
 
 bool ScientificCalculator::modulus() {
@@ -38,17 +38,35 @@ bool ScientificCalculator::modulus() {
 			this -> result -= this -> value2;
 		}
 		return true;
-	} else {
-		std::cout << std::endl;
-		std::cout << "Division by zero detected." << std::endl;
-		std::cout << "Please enter a valid number for divisor." << std::endl;
-		return false;
 	}
+	
+	std::cout << std::endl;
+	std::cout << "Division by zero detected." << std::endl;
+	std::cout << "Please enter a valid number for divisor." << std::endl;
+	return false;
 }
 
 void ScientificCalculator::exponent() {
 	this -> result = this -> value1 * pow(10, this -> value2);
 	return;
+}
+
+bool ScientificCalculator::factorial() {
+	if (this -> value1 < 0) {
+		std::cout << "Factorial of a negative number is undefined." << std::endl;
+		return false;
+	}
+
+	if (this -> value1 - static_cast<long long>(this -> value1) != 0.0L) {
+		std::cout << "Factorial of a non-integer number is undefined." << std::endl;
+		return false;
+	}
+
+	this -> result = 1;
+	for (long long numberToMultiply = 1; numberToMultiply <= long long(this -> value1); numberToMultiply++) {
+		this -> result *= numberToMultiply;
+	}
+	return true;
 }
 
 void ScientificCalculator::printResult(const MenuChoices& operationIndex) const {
@@ -82,6 +100,10 @@ void ScientificCalculator::printResult(const MenuChoices& operationIndex) const 
 		case MenuChoices::EXPONENT: {
 			std::cout << this -> value1 << " * 10 ^ " << this -> value2;
 			break;
+		}
+		
+		case MenuChoices::FACTORIAL: {
+			std::cout << this -> value1 << "!";
 			break;
 		}
 		
@@ -147,6 +169,14 @@ bool ScientificCalculator::executeOperation(const MenuChoices& operationIndex) {
 			break;
 		}
 		
+		case MenuChoices::FACTORIAL: {
+			if (!this -> getNumberValue("")) {
+				return true;
+			}
+			shouldPrintResult = this -> factorial();
+			break;
+		}
+		
 		case MenuChoices::EXIT: {
 			std::cout << "Thanks for using our Scientific Calculator." << std::endl;
 			std::cout << "Exiting from the calculator..." << std::endl;
@@ -178,6 +208,7 @@ ScientificCalculator::MenuChoices ScientificCalculator::getMenuChoice() const {
 		std::cout << "[4] - Divide" << std::endl;
 		std::cout << "[5] - Modulus" << std::endl;
 		std::cout << "[6] - Exponent" << std::endl;
+		std::cout << "[7] - Factorial" << std::endl;
 
 		std::cout << std::endl;
 		std::cout << "[0] - Quit" << std::endl;
@@ -191,29 +222,27 @@ ScientificCalculator::MenuChoices ScientificCalculator::getMenuChoice() const {
 			if (choice >= static_cast<int>(this -> MenuChoices::EXIT) && 
 				choice <= static_cast<int>(this -> MenuChoices::LENGTH - 1)) {
 				return static_cast<MenuChoices>(choice);
-			} else {
-				std::cout << "Invalid menu option. Please enter a valid menu option." << std::endl << std::endl;
-				continue;
 			}
-		} else {
-			std::cout << "Invalid input. Please enter a valid number." << std::endl << std::endl;
+			std::cout << "Invalid menu option. Please enter a valid menu option." << std::endl << std::endl;
 			continue;
 		}
+		std::cout << "Invalid input. Please enter a valid number." << std::endl << std::endl;
+		continue;
 	}
 }
 
 bool ScientificCalculator::getNumberValues() {
-	if (!getNumberValue(true) || !getNumberValue(false)) {
+	if (!getNumberValue("first") || !getNumberValue("second")) {
 		std::cout << "Couldn't get values. Process cancelled." << std::endl << std::endl;
 		return false;
 	}
 	return true;
 }
 
-bool ScientificCalculator::getNumberValue(const bool& isFirst) {
+bool ScientificCalculator::getNumberValue(const std::string& order) {
 	std::string line = "";
 	while (true) {
-		std::cout << "Enter " << (isFirst ? "first" : "second") << " value (q/Q to cancel): ";
+		std::cout << "Enter" << (order == "" ? "" : " " + order + " ") << "value (q/Q to cancel): ";
 		std::getline(std::cin, line);
 		if (line == "q" || line == "Q") {
 			std::cout << std::endl;
@@ -221,11 +250,10 @@ bool ScientificCalculator::getNumberValue(const bool& isFirst) {
 		}
 
 		std::istringstream iss(line);
-		if (iss >> (isFirst ? this -> value1 : this -> value2)) {
+		if (iss >> (order == "second" ? this -> value2 : this -> value1)) {
 			return true;
-		} else {
-			std::cout << "Invalid input. Please enter a valid number." << std::endl << std::endl;
-			continue;
 		}
+		std::cout << "Invalid input. Please enter a valid number." << std::endl << std::endl;
+		continue;
 	}
 }

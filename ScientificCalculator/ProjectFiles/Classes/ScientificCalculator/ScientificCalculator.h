@@ -20,8 +20,9 @@ class ScientificCalculator {
 			DIVIDE = 4,
 			MODULUS = 5,
 			EXPONENT = 6,
+			FACTORIAL = 7,
 
-			LENGTH = 7
+			LENGTH = 8
 		};
 
 		void add();
@@ -30,11 +31,12 @@ class ScientificCalculator {
 		bool divide();
 		bool modulus();
 		void exponent();
+		bool factorial();
 
 		void printResult(const MenuChoices& operationIndex) const;
 		bool executeOperation(const MenuChoices& operationIndex);
 		MenuChoices getMenuChoice() const;
 
 		bool getNumberValues();
-		bool getNumberValue(const bool& isFirst);
+		bool getNumberValue(const std::string& isFirst);
 };
