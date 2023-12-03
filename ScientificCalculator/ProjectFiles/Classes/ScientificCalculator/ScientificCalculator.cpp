@@ -74,6 +74,12 @@ void ScientificCalculator::absolute() {
 	return;
 }
 
+void ScientificCalculator::additiveInverse() {
+	this -> result = (-1) * (this -> value1);
+	return;
+}
+
+
 
 void ScientificCalculator::printResult(const MenuChoices& operationIndex) const {
 	std::cout << "Result: ";
@@ -115,6 +121,11 @@ void ScientificCalculator::printResult(const MenuChoices& operationIndex) const 
 		
 		case MenuChoices::ABSOLUTE: {
 			std::cout << "|" << this -> value1 << "|";
+			break;
+		}
+
+		case MenuChoices::ADDITIVE_INVERSE: {
+			std::cout << "-" << "(" << this -> value1 << ")";
 			break;
 		}
 		
@@ -196,6 +207,14 @@ bool ScientificCalculator::executeOperation(const MenuChoices& operationIndex) {
 			break;
 		}
 		
+		case MenuChoices::ADDITIVE_INVERSE: {
+			if (!this -> getNumberValue("")) {
+				return true;
+			}
+			this -> additiveInverse();
+			break;
+		}
+		
 		case MenuChoices::EXIT: {
 			std::cout << "Thanks for using our Scientific Calculator." << std::endl;
 			std::cout << "Exiting from the calculator..." << std::endl;
@@ -229,6 +248,7 @@ ScientificCalculator::MenuChoices ScientificCalculator::getMenuChoice() const {
 		std::cout << "[6] - Exponent" << std::endl;
 		std::cout << "[7] - Factorial" << std::endl;
 		std::cout << "[8] - Absolute" << std::endl;
+		std::cout << "[9] - Additive Inverse" << std::endl;
 
 		std::cout << std::endl;
 		std::cout << "[0] - Quit" << std::endl;

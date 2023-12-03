@@ -22,8 +22,9 @@ class ScientificCalculator {
 			EXPONENT = 6,
 			FACTORIAL = 7,
 			ABSOLUTE = 8,
+			ADDITIVE_INVERSE = 9,
 
-			LENGTH = 9
+			LENGTH = 10
 		};
 
 		void add();
@@ -34,6 +35,7 @@ class ScientificCalculator {
 		void exponent();
 		bool factorial();
 		void absolute();
+		void additiveInverse();
 
 		void printResult(const MenuChoices& operationIndex) const;
 		bool executeOperation(const MenuChoices& operationIndex);
