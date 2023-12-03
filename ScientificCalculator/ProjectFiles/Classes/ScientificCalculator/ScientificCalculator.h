@@ -23,8 +23,9 @@ class ScientificCalculator {
 			FACTORIAL = 7,
 			ABSOLUTE = 8,
 			ADDITIVE_INVERSE = 9,
+			MULTIPLICATIVE_INVERSE = 10,
 
-			LENGTH = 10
+			LENGTH = 11
 		};
 
 		void add();
@@ -36,6 +37,7 @@ class ScientificCalculator {
 		bool factorial();
 		void absolute();
 		void additiveInverse();
+		bool multiplicativeInverse();
 
 		void printResult(const MenuChoices& operationIndex) const;
 		bool executeOperation(const MenuChoices& operationIndex);

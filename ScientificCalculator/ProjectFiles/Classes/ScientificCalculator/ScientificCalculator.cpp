@@ -79,6 +79,17 @@ void ScientificCalculator::additiveInverse() {
 	return;
 }
 
+bool ScientificCalculator::multiplicativeInverse() {
+	if (this -> value1 != 0) {
+		this -> result = 1 / this -> value1;
+		return true;
+	}
+	
+	std::cout << std::endl;
+	std::cout << "Division by zero detected." << std::endl;
+	std::cout << "Please enter a valid number for divisor." << std::endl;
+	return false;
+}
 
 
 void ScientificCalculator::printResult(const MenuChoices& operationIndex) const {
@@ -129,6 +140,11 @@ void ScientificCalculator::printResult(const MenuChoices& operationIndex) const 
 			break;
 		}
 		
+		case MenuChoices::MULTIPLICATIVE_INVERSE: {
+			std::cout << "1 / " << this -> value1;
+			break;
+		}
+
 		case MenuChoices::EXIT: {
 			break;
 		}
@@ -214,6 +230,14 @@ bool ScientificCalculator::executeOperation(const MenuChoices& operationIndex) {
 			this -> additiveInverse();
 			break;
 		}
+
+		case MenuChoices::MULTIPLICATIVE_INVERSE: {
+			if (!this -> getNumberValue("")) {
+				return true;
+			}
+			shouldPrintResult = this -> multiplicativeInverse();
+			break;
+		}
 		
 		case MenuChoices::EXIT: {
 			std::cout << "Thanks for using our Scientific Calculator." << std::endl;
@@ -249,6 +273,7 @@ ScientificCalculator::MenuChoices ScientificCalculator::getMenuChoice() const {
 		std::cout << "[7] - Factorial" << std::endl;
 		std::cout << "[8] - Absolute" << std::endl;
 		std::cout << "[9] - Additive Inverse" << std::endl;
+		std::cout << "[10] - Multiplicative Inverse" << std::endl;
 
 		std::cout << std::endl;
 		std::cout << "[0] - Quit" << std::endl;
