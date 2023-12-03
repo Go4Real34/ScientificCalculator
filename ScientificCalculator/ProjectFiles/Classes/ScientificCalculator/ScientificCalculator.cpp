@@ -91,6 +91,10 @@ bool ScientificCalculator::multiplicativeInverse() {
 	return false;
 }
 
+void ScientificCalculator::square() {
+	this -> result = pow(this -> value1, 2);
+}
+
 
 void ScientificCalculator::printResult(const MenuChoices& operationIndex) const {
 	std::cout << "Result: ";
@@ -144,7 +148,12 @@ void ScientificCalculator::printResult(const MenuChoices& operationIndex) const 
 			std::cout << "1 / " << this -> value1;
 			break;
 		}
-
+		
+		case MenuChoices::SQUARE: {
+			std::cout << this -> value1 << " ^ 2";
+			break;
+		}
+		
 		case MenuChoices::EXIT: {
 			break;
 		}
@@ -239,6 +248,14 @@ bool ScientificCalculator::executeOperation(const MenuChoices& operationIndex) {
 			break;
 		}
 		
+		case MenuChoices::SQUARE: {
+			if (!this -> getNumberValue("")) {
+				return true;
+			}
+			this -> square();
+			break;
+		}
+		
 		case MenuChoices::EXIT: {
 			std::cout << "Thanks for using our Scientific Calculator." << std::endl;
 			std::cout << "Exiting from the calculator..." << std::endl;
@@ -274,6 +291,7 @@ ScientificCalculator::MenuChoices ScientificCalculator::getMenuChoice() const {
 		std::cout << "[8] - Absolute" << std::endl;
 		std::cout << "[9] - Additive Inverse" << std::endl;
 		std::cout << "[10] - Multiplicative Inverse" << std::endl;
+		std::cout << "[11] - Square" << std::endl;
 
 		std::cout << std::endl;
 		std::cout << "[0] - Quit" << std::endl;
@@ -307,7 +325,7 @@ bool ScientificCalculator::getNumberValues() {
 bool ScientificCalculator::getNumberValue(const std::string& order) {
 	std::string line = "";
 	while (true) {
-		std::cout << "Enter" << (order == "" ? "" : " " + order + " ") << "value (q/Q to cancel): ";
+		std::cout << "Enter" << (order == "" ? " " : " " + order + " ") << "value (q/Q to cancel): ";
 		std::getline(std::cin, line);
 		if (line == "q" || line == "Q") {
 			std::cout << std::endl;

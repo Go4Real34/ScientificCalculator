@@ -24,8 +24,9 @@ class ScientificCalculator {
 			ABSOLUTE = 8,
 			ADDITIVE_INVERSE = 9,
 			MULTIPLICATIVE_INVERSE = 10,
+			SQUARE = 11,
 
-			LENGTH = 11
+			LENGTH = 12
 		};
 
 		void add();
@@ -38,6 +39,7 @@ class ScientificCalculator {
 		void absolute();
 		void additiveInverse();
 		bool multiplicativeInverse();
+		void square();
 
 		void printResult(const MenuChoices& operationIndex) const;
 		bool executeOperation(const MenuChoices& operationIndex);
