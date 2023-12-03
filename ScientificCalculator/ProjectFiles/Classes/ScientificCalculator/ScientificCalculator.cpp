@@ -69,6 +69,12 @@ bool ScientificCalculator::factorial() {
 	return true;
 }
 
+void ScientificCalculator::absolute() {
+	this -> result = this -> value1 >= 0 ? this -> value1 : (-1) * (this -> value1);
+	return;
+}
+
+
 void ScientificCalculator::printResult(const MenuChoices& operationIndex) const {
 	std::cout << "Result: ";
 	switch (operationIndex) {
@@ -104,6 +110,11 @@ void ScientificCalculator::printResult(const MenuChoices& operationIndex) const 
 		
 		case MenuChoices::FACTORIAL: {
 			std::cout << this -> value1 << "!";
+			break;
+		}
+		
+		case MenuChoices::ABSOLUTE: {
+			std::cout << "|" << this -> value1 << "|";
 			break;
 		}
 		
@@ -177,6 +188,14 @@ bool ScientificCalculator::executeOperation(const MenuChoices& operationIndex) {
 			break;
 		}
 		
+		case MenuChoices::ABSOLUTE: {
+			if (!this -> getNumberValue("")) {
+				return true;
+			}
+			this -> absolute();
+			break;
+		}
+		
 		case MenuChoices::EXIT: {
 			std::cout << "Thanks for using our Scientific Calculator." << std::endl;
 			std::cout << "Exiting from the calculator..." << std::endl;
@@ -209,6 +228,7 @@ ScientificCalculator::MenuChoices ScientificCalculator::getMenuChoice() const {
 		std::cout << "[5] - Modulus" << std::endl;
 		std::cout << "[6] - Exponent" << std::endl;
 		std::cout << "[7] - Factorial" << std::endl;
+		std::cout << "[8] - Absolute" << std::endl;
 
 		std::cout << std::endl;
 		std::cout << "[0] - Quit" << std::endl;

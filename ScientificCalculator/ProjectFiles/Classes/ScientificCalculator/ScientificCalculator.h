@@ -21,8 +21,9 @@ class ScientificCalculator {
 			MODULUS = 5,
 			EXPONENT = 6,
 			FACTORIAL = 7,
+			ABSOLUTE = 8,
 
-			LENGTH = 8
+			LENGTH = 9
 		};
 
 		void add();
@@ -32,6 +33,7 @@ class ScientificCalculator {
 		bool modulus();
 		void exponent();
 		bool factorial();
+		void absolute();
 
 		void printResult(const MenuChoices& operationIndex) const;
 		bool executeOperation(const MenuChoices& operationIndex);
