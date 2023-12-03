@@ -44,6 +44,10 @@ bool ScientificCalculator::modulus() {
 		std::cout << "Please enter a valid number for divisor." << std::endl;
 		return false;
 	}
+}
+
+void ScientificCalculator::exponent() {
+	this -> result = this -> value1 * pow(10, this -> value2);
 	return;
 }
 
@@ -72,6 +76,12 @@ void ScientificCalculator::printResult(const MenuChoices& operationIndex) const 
 		
 		case MenuChoices::MODULUS: {
 			std::cout << this -> value1 << " % " << this -> value2;
+			break;
+		}
+		
+		case MenuChoices::EXPONENT: {
+			std::cout << this -> value1 << " * 10 ^ " << this -> value2;
+			break;
 			break;
 		}
 		
@@ -129,6 +139,14 @@ bool ScientificCalculator::executeOperation(const MenuChoices& operationIndex) {
 			break;
 		}
 		
+		case MenuChoices::EXPONENT: {
+			if (!this -> getNumberValues()) {
+				return true;
+			}
+			this -> exponent();
+			break;
+		}
+		
 		case MenuChoices::EXIT: {
 			std::cout << "Thanks for using our Scientific Calculator." << std::endl;
 			std::cout << "Exiting from the calculator..." << std::endl;
@@ -159,6 +177,7 @@ ScientificCalculator::MenuChoices ScientificCalculator::getMenuChoice() const {
 		std::cout << "[3] - Multiply" << std::endl;
 		std::cout << "[4] - Divide" << std::endl;
 		std::cout << "[5] - Modulus" << std::endl;
+		std::cout << "[6] - Exponent" << std::endl;
 
 		std::cout << std::endl;
 		std::cout << "[0] - Quit" << std::endl;

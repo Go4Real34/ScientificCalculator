@@ -19,8 +19,9 @@ class ScientificCalculator {
 			MULTIPLY = 3,
 			DIVIDE = 4,
 			MODULUS = 5,
+			EXPONENT = 6,
 
-			LENGTH = 6
+			LENGTH = 7
 		};
 
 		void add();
@@ -28,6 +29,7 @@ class ScientificCalculator {
 		void multiply();
 		bool divide();
 		bool modulus();
+		void exponent();
 
 		void printResult(const MenuChoices& operationIndex) const;
 		bool executeOperation(const MenuChoices& operationIndex);
