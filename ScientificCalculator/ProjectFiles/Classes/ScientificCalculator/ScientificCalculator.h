@@ -26,8 +26,9 @@ class ScientificCalculator {
 			MULTIPLICATIVE_INVERSE = 10,
 			SQUARE = 11,
 			SQUARE_ROOT = 12,
+			POWER = 13,
 
-			LENGTH = 13
+			LENGTH = 14
 		};
 
 		void add();
@@ -42,6 +43,7 @@ class ScientificCalculator {
 		bool multiplicativeInverse();
 		void square();
 		bool squareRoot();
+		void power();
 
 		void printResult(const MenuChoices& operationIndex) const;
 		bool executeOperation(const MenuChoices& operationIndex);

@@ -107,6 +107,11 @@ bool ScientificCalculator::squareRoot() {
 	return false;
 }
 
+void ScientificCalculator::power() {
+	this -> result = pow(this -> value1, this -> value2);
+	return;
+}
+
 
 void ScientificCalculator::printResult(const MenuChoices& operationIndex) const {
 	std::cout << "Result: ";
@@ -168,6 +173,11 @@ void ScientificCalculator::printResult(const MenuChoices& operationIndex) const 
 		
 		case MenuChoices::SQUARE_ROOT: {
 			std::cout << "sqrt(" << this -> value1 << ")";
+			break;
+		}
+		
+		case MenuChoices::POWER: {
+			std::cout << this -> value1 << " ^ " << this -> value2;
 			break;
 		}
 		
@@ -281,6 +291,14 @@ bool ScientificCalculator::executeOperation(const MenuChoices& operationIndex) {
 			break;
 		}
 		
+		case MenuChoices::POWER: {
+			if (!this -> getNumberValues()) {
+				return true;
+			}
+			this -> power();
+			break;
+		}
+		
 		case MenuChoices::EXIT: {
 			std::cout << "Thanks for using our Scientific Calculator." << std::endl;
 			std::cout << "Exiting from the calculator..." << std::endl;
@@ -318,6 +336,7 @@ ScientificCalculator::MenuChoices ScientificCalculator::getMenuChoice() const {
 		std::cout << "[10] - Multiplicative Inverse" << std::endl;
 		std::cout << "[11] - Square" << std::endl;
 		std::cout << "[12] - Square Root" << std::endl;
+		std::cout << "[13] - Power" << std::endl;
 
 		std::cout << std::endl;
 		std::cout << "[0] - Quit" << std::endl;
