@@ -31,6 +31,22 @@ bool ScientificCalculator::divide() {
 	}
 }
 
+bool ScientificCalculator::modulus() {
+	if (this -> value2 != 0) {
+		this -> result = this -> value1;
+		while (this -> result >= this -> value2) {
+			this -> result -= this -> value2;
+		}
+		return true;
+	} else {
+		std::cout << std::endl;
+		std::cout << "Division by zero detected." << std::endl;
+		std::cout << "Please enter a valid number for divisor." << std::endl;
+		return false;
+	}
+	return;
+}
+
 void ScientificCalculator::printResult(const MenuChoices& operationIndex) const {
 	std::cout << "Result: ";
 	switch (operationIndex) {
@@ -54,6 +70,11 @@ void ScientificCalculator::printResult(const MenuChoices& operationIndex) const 
 			break;
 		}
 		
+		case MenuChoices::MODULUS: {
+			std::cout << this -> value1 << " % " << this -> value2;
+			break;
+		}
+		
 		case MenuChoices::EXIT: {
 			break;
 		}
@@ -69,26 +90,42 @@ bool ScientificCalculator::executeOperation(const MenuChoices& operationIndex) {
 	bool shouldPrintResult = true;
 	switch (operationIndex) {
 		case MenuChoices::ADD: {
-			this -> getNumberValues();
+			if (!this -> getNumberValues()) {
+				return true;
+			}
 			this -> add();
 			break;
 		}
 		
 		case MenuChoices::SUBSTRACT: {
-			this -> getNumberValues();
+			if (!this -> getNumberValues()) {
+				return true;
+			}
 			this -> substract();
 			break;
 		}
 		
 		case MenuChoices::MULTIPLY: {
-			this -> getNumberValues();
+			if (!this -> getNumberValues()) {
+				return true;
+			}
 			this -> multiply();
 			break;
 		}
 		
 		case MenuChoices::DIVIDE: {
-			this -> getNumberValues();
+			if (!this -> getNumberValues()) {
+				return true;
+			}
 			shouldPrintResult = this -> divide();
+			break;
+		}
+		
+		case MenuChoices::MODULUS: {
+			if (!this -> getNumberValues()) {
+				return true;
+			}
+			shouldPrintResult = this -> modulus();
 			break;
 		}
 		
@@ -108,6 +145,7 @@ bool ScientificCalculator::executeOperation(const MenuChoices& operationIndex) {
 		std::cout << std::endl;
 		this -> printResult(operationIndex);
 	}
+
 	return true;
 }
 
@@ -120,6 +158,7 @@ ScientificCalculator::MenuChoices ScientificCalculator::getMenuChoice() const {
 		std::cout << "[2] - Substract" << std::endl;
 		std::cout << "[3] - Multiply" << std::endl;
 		std::cout << "[4] - Divide" << std::endl;
+		std::cout << "[5] - Modulus" << std::endl;
 
 		std::cout << std::endl;
 		std::cout << "[0] - Quit" << std::endl;

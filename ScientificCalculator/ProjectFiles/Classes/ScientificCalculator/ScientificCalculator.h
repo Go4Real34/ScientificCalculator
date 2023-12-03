@@ -18,14 +18,16 @@ class ScientificCalculator {
 			SUBSTRACT = 2,
 			MULTIPLY = 3,
 			DIVIDE = 4,
+			MODULUS = 5,
 
-			LENGTH = 5
+			LENGTH = 6
 		};
 
 		void add();
 		void substract();
 		void multiply();
 		bool divide();
+		bool modulus();
 
 		void printResult(const MenuChoices& operationIndex) const;
 		bool executeOperation(const MenuChoices& operationIndex);
