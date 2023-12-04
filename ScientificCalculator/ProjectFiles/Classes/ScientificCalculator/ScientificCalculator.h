@@ -5,6 +5,8 @@ class ScientificCalculator {
 		ScientificCalculator() = default;
 		~ScientificCalculator() = default;
 
+		void run();
+
 	private:
 		long double value1 = 0;
 		long double value2 = 0;

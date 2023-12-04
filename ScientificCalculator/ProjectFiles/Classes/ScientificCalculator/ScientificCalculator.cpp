@@ -4,6 +4,22 @@
 
 #include "ScientificCalculator.h"
 
+void ScientificCalculator::run() {
+	system("CLS");
+	std::cout << "Welcome to our Scientific Calculator." << std::endl;
+	std::cout << "This calculator can perform the following operations:" << std::endl;
+	std::cout << "Addition, Substraction, Multiplication, Division, Modulus" << std::endl;
+	std::cout << std::endl;
+
+	while (true) {
+		MenuChoices operationIndex = this -> getMenuChoice();
+		if (!this -> executeOperation(operationIndex)) {
+			break;
+		}
+		std::cout << std::endl;
+	}
+}
+
 void ScientificCalculator::add() {
 	this -> result = this -> value1 + this -> value2;
 	return;
