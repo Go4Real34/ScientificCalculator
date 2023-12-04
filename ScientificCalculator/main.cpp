@@ -1,7 +1,10 @@
 #include <iostream>
 
-int main() {
-	std::cout << "Hello world." << std::endl;
+#include "ProjectFiles/Classes/ScientificCalculator/ScientificCalculator.h"
 
+int main() {
+	ScientificCalculator calculator;
+	calculator.run();
+	
 	return 0;
 }
