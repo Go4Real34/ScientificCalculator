@@ -29,8 +29,9 @@ class ScientificCalculator {
 			POWER = 13,
 			POWER_OF_TEN = 14,
 			LOGARITHM_WITH_BASE_TEN = 15,
+			LOGARITHM_WITH_BASE_E = 16,
 
-			LENGTH = 16
+			LENGTH = 17
 		};
 
 		void add();
@@ -48,6 +49,7 @@ class ScientificCalculator {
 		void power();
 		void powerOfTen();
 		bool logarithmWithBaseTen();
+		bool logarithmWithBaseE();
 
 		void printResult(const MenuChoices& operationIndex) const;
 		bool executeOperation(const MenuChoices& operationIndex);
