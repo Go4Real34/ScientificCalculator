@@ -12,7 +12,7 @@ class ScientificCalculator {
 		long double result = 0;
 
 		const enum MenuChoices {
-			EXIT = 0,
+			MENU_CHOICES_EXIT = 0,
 
 			ADD = 1,
 			SUBSTRACT = 2,
@@ -31,9 +31,24 @@ class ScientificCalculator {
 			LOGARITHM_WITH_BASE_TEN = 15,
 			LOGARITHM_WITH_BASE_E = 16,
 			LOGARITHM_WITH_BASE_N = 17,
+			SINE = 18,
 
-			LENGTH = 18
+			MENU_CHOICES_LENGTH = 19
 		};
+
+		const long double PI = 3.14159265358979323846L;
+
+		const enum AngleTypes {
+			ANGLE_TYPES_EXIT = 0,
+
+			DEGREE = 1,
+			RADIAN = 2,
+			GRADIAN = 3,
+
+			ANGLE_TYPES_LENGTH = 4
+		};
+		
+		AngleTypes angleIndex = AngleTypes::DEGREE;
 
 		void add();
 		void substract();
@@ -52,11 +67,15 @@ class ScientificCalculator {
 		bool logarithmWithBaseTen();
 		bool logarithmWithBaseE();
 		bool logarithmWithBaseN();
+		void sine();
 
 		void printResult(const MenuChoices& operationIndex) const;
 		bool executeOperation(const MenuChoices& operationIndex);
+		
 		MenuChoices getMenuChoice() const;
-
+		void convertToRadian();
+		bool getAngleType();
+		
 		bool getNumberValues();
 		bool getNumberValue(const std::string& isFirst);
 };

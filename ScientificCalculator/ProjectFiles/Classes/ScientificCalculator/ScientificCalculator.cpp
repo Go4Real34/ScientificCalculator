@@ -185,6 +185,11 @@ bool ScientificCalculator::logarithmWithBaseN() {
 	return false;
 }
 
+void ScientificCalculator::sine() {
+	this -> result = sin(this -> value2);
+	return;
+}
+
 
 void ScientificCalculator::printResult(const MenuChoices& operationIndex) const {
 	std::cout << "Result: ";
@@ -273,8 +278,15 @@ void ScientificCalculator::printResult(const MenuChoices& operationIndex) const 
 			std::cout << "log" << this -> value1 << "(" << this -> value2 << ")";
 			break;
 		}
-
-		case MenuChoices::EXIT: {
+		
+		case MenuChoices::SINE: {
+			std::cout << "sin(" << this -> value1 << (this -> angleIndex == AngleTypes::DEGREE ? "deg" 
+													  : 
+													  this -> angleIndex == AngleTypes::RADIAN ? "rad" : "grad") << ")";
+			break;
+		}
+		
+		case MenuChoices::MENU_CHOICES_EXIT: {
 			break;
 		}
 		
@@ -424,7 +436,20 @@ bool ScientificCalculator::executeOperation(const MenuChoices& operationIndex) {
 			break;
 		}
 		
-		case MenuChoices::EXIT: {
+		case MenuChoices::SINE: {
+			if (!this -> getNumberValue("")) {
+				return true;
+			}
+
+			if (!this -> getAngleType()) {
+				return true;
+			}
+			this -> convertToRadian();
+			this -> sine();
+			break;
+		}
+		
+		case MenuChoices::MENU_CHOICES_EXIT: {
 			std::cout << "Thanks for using our Scientific Calculator." << std::endl;
 			std::cout << "Exiting from the calculator..." << std::endl;
 			return false;
@@ -466,6 +491,7 @@ ScientificCalculator::MenuChoices ScientificCalculator::getMenuChoice() const {
 		std::cout << "[15] - Logarithm Base Ten" << std::endl;
 		std::cout << "[16] - Logarithm Base E" << std::endl;
 		std::cout << "[17] - Logarithm Base N" << std::endl;
+		std::cout << "[18] - Sine" << std::endl;
 
 		std::cout << std::endl;
 		std::cout << "[0] - Quit" << std::endl;
@@ -476,9 +502,66 @@ ScientificCalculator::MenuChoices ScientificCalculator::getMenuChoice() const {
 		std::istringstream iss(line);
 		int choice = 0;
 		if (iss >> choice) {
-			if (choice >= static_cast<int>(this -> MenuChoices::EXIT) && 
-				choice <= static_cast<int>(this -> MenuChoices::LENGTH - 1)) {
+			if (choice >= static_cast<int>(this -> MenuChoices::MENU_CHOICES_EXIT) && 
+				choice <= static_cast<int>(this -> MenuChoices::MENU_CHOICES_LENGTH - 1)) {
 				return static_cast<MenuChoices>(choice);
+			}
+			std::cout << "Invalid menu option. Please enter a valid menu option." << std::endl << std::endl;
+			continue;
+		}
+		std::cout << "Invalid input. Please enter a valid number." << std::endl << std::endl;
+		continue;
+	}
+}
+
+void ScientificCalculator::convertToRadian() {
+	switch (this -> angleIndex) {
+		case AngleTypes::DEGREE: {
+			this -> value2 = this -> value1 * (this -> PI / 180);
+			break;
+		}
+		
+		case AngleTypes::RADIAN: {
+			this -> value2 = this -> value1;
+			break;
+		}
+
+		case AngleTypes::GRADIAN: {
+			this -> value2 = this -> value1 * (this -> PI / 200);
+			break;
+		}
+		
+		default: {
+			break;
+		}
+	}
+}
+
+bool ScientificCalculator::getAngleType() {
+	std::string line = "";
+
+	while (true) {
+		std::cout << "Please select an angle type from the menu below." << std::endl;
+		std::cout << "[1] - Degrees" << std::endl;
+		std::cout << "[2] - Radians" << std::endl;
+		std::cout << "[3] - Gradians" << std::endl;
+
+		std::cout << std::endl;
+		std::cout << "[0] - Quit" << std::endl;
+		std::cout << "Choice: ";
+		std::getline(std::cin, line);
+
+		std::istringstream iss(line);
+		int choice = 0;
+		if (iss >> choice) {
+			if (choice == static_cast<int>(this -> AngleTypes::ANGLE_TYPES_EXIT) ) {
+				return false;
+			}
+
+			if (choice >= static_cast<int>(this -> AngleTypes::ANGLE_TYPES_EXIT) && 
+				choice <= static_cast<int>(this -> AngleTypes::ANGLE_TYPES_LENGTH - 1)) {
+				this -> angleIndex = static_cast<AngleTypes>(choice);
+				return true;
 			}
 			std::cout << "Invalid menu option. Please enter a valid menu option." << std::endl << std::endl;
 			continue;
