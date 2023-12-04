@@ -151,6 +151,40 @@ bool ScientificCalculator::logarithmWithBaseE() {
 	return false;
 }
 
+bool ScientificCalculator::logarithmWithBaseN() {
+	if (((0 < this -> value1 && this -> value1 < 1) || (this -> value1 > 1)) && (this -> value2 > 0)) {
+		this -> result = log(this -> value2) / log(this -> value1);
+		return true;
+	}
+	
+	std::cout << std::endl;
+	if (this -> value1 == 0 && this -> value2 == 0) {
+		std::cout << "Logarithm with base " << this -> value1 << " of " << this -> value2 << " is undefined." << std::endl;
+	}
+
+	if (this -> value1 == 0 && this -> value2 > 0) {
+		std::cout << "Logarithm with base " << this -> value1 << " of any number is undefined." << std::endl;
+	}
+
+	if (this -> value1 > 0 && this -> value2 == 0) {
+		std::cout << "Logarithm with base " << this -> value1 << " of zero is negative infinite." << std::endl;
+	}
+
+	if (this -> value1 == 1) {
+		std::cout << "Logarithm with base " << this -> value1 << " of any number is undefined." << std::endl;
+	}
+
+	if (this -> value1 < 0) {
+		std::cout << "Logarithm with base " << this -> value1 << " is imaginary." << std::endl;
+	}
+
+	if (this -> value2 < 0) {
+		std::cout << "Logarithm with base " << this -> value1 << " of a negative number is imaginary." << std::endl;
+	}
+	std::cout << "Please enter a valid number." << std::endl;
+	return false;
+}
+
 
 void ScientificCalculator::printResult(const MenuChoices& operationIndex) const {
 	std::cout << "Result: ";
@@ -235,6 +269,11 @@ void ScientificCalculator::printResult(const MenuChoices& operationIndex) const 
 			break;
 		}
 		
+		case MenuChoices::LOGARITHM_WITH_BASE_N: {
+			std::cout << "log" << this -> value1 << "(" << this -> value2 << ")";
+			break;
+		}
+
 		case MenuChoices::EXIT: {
 			break;
 		}
@@ -377,6 +416,14 @@ bool ScientificCalculator::executeOperation(const MenuChoices& operationIndex) {
 			break;
 		}
 		
+		case MenuChoices::LOGARITHM_WITH_BASE_N: {
+			if (!this -> getNumberValues()) {
+				return true;
+			}
+			shouldPrintResult = this -> logarithmWithBaseN();
+			break;
+		}
+		
 		case MenuChoices::EXIT: {
 			std::cout << "Thanks for using our Scientific Calculator." << std::endl;
 			std::cout << "Exiting from the calculator..." << std::endl;
@@ -418,6 +465,7 @@ ScientificCalculator::MenuChoices ScientificCalculator::getMenuChoice() const {
 		std::cout << "[14] - Power of Ten" << std::endl;
 		std::cout << "[15] - Logarithm Base Ten" << std::endl;
 		std::cout << "[16] - Logarithm Base E" << std::endl;
+		std::cout << "[17] - Logarithm Base N" << std::endl;
 
 		std::cout << std::endl;
 		std::cout << "[0] - Quit" << std::endl;
