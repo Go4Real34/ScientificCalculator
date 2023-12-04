@@ -190,6 +190,11 @@ void ScientificCalculator::sine() {
 	return;
 }
 
+void ScientificCalculator::cosine() {
+	this -> result = cos(this -> value2);
+	return;
+}
+
 
 void ScientificCalculator::printResult(const MenuChoices& operationIndex) const {
 	std::cout << "Result: ";
@@ -281,6 +286,13 @@ void ScientificCalculator::printResult(const MenuChoices& operationIndex) const 
 		
 		case MenuChoices::SINE: {
 			std::cout << "sin(" << this -> value1 << (this -> angleIndex == AngleTypes::DEGREE ? "deg" 
+													  : 
+													  this -> angleIndex == AngleTypes::RADIAN ? "rad" : "grad") << ")";
+			break;
+		}
+		
+		case MenuChoices::COSINE: {
+			std::cout << "cos(" << this -> value1 << (this -> angleIndex == AngleTypes::DEGREE ? "deg" 
 													  : 
 													  this -> angleIndex == AngleTypes::RADIAN ? "rad" : "grad") << ")";
 			break;
@@ -448,6 +460,19 @@ bool ScientificCalculator::executeOperation(const MenuChoices& operationIndex) {
 			this -> sine();
 			break;
 		}
+
+		case MenuChoices::COSINE: {
+			if (!this -> getNumberValue("")) {
+				return true;
+			}
+
+			if (!this -> getAngleType()) {
+				return true;
+			}
+			this -> convertToRadian();
+			this -> cosine();
+			break;
+		}
 		
 		case MenuChoices::MENU_CHOICES_EXIT: {
 			std::cout << "Thanks for using our Scientific Calculator." << std::endl;
@@ -492,6 +517,7 @@ ScientificCalculator::MenuChoices ScientificCalculator::getMenuChoice() const {
 		std::cout << "[16] - Logarithm Base E" << std::endl;
 		std::cout << "[17] - Logarithm Base N" << std::endl;
 		std::cout << "[18] - Sine" << std::endl;
+		std::cout << "[19] - Cosine" << std::endl;
 
 		std::cout << std::endl;
 		std::cout << "[0] - Quit" << std::endl;

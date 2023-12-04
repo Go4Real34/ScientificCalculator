@@ -32,8 +32,9 @@ class ScientificCalculator {
 			LOGARITHM_WITH_BASE_E = 16,
 			LOGARITHM_WITH_BASE_N = 17,
 			SINE = 18,
+			COSINE = 19,
 
-			MENU_CHOICES_LENGTH = 19
+			MENU_CHOICES_LENGTH = 20
 		};
 
 		const long double PI = 3.14159265358979323846L;
@@ -68,6 +69,7 @@ class ScientificCalculator {
 		bool logarithmWithBaseE();
 		bool logarithmWithBaseN();
 		void sine();
+		void cosine();
 
 		void printResult(const MenuChoices& operationIndex) const;
 		bool executeOperation(const MenuChoices& operationIndex);
